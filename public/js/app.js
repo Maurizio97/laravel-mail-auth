@@ -1922,9 +1922,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      videogameList: []
+    };
+  },
   mounted: function mounted() {
-    console.log('ciao');
+    var _this = this;
+
+    axios.get('/api/get/videogames').then(function (res) {
+      return _this.videogameList = res.data;
+    })["catch"](function (e) {
+      return console.log(e);
+    });
+    console.log(this.videogameList);
+  },
+  methods: {
+    deleteVideogame: function deleteVideogame(id) {
+      var _this2 = this;
+
+      axios.get("/delete/videogame/".concat(id)).then(function (res) {
+        var ind = _this2.matchVideogameDelete(id);
+
+        _this2.videogameList.splice(ind, 1);
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    matchVideogameDelete: function matchVideogameDelete(index) {
+      // this.videogameList.forEach(videogame => {
+      // });
+      for (var x = 0; x <= this.videogameList.length; x++) {
+        if (index == this.videogameList[x].id) {
+          return x;
+        }
+      }
+
+      return -1;
+    }
   }
 });
 
@@ -6309,7 +6354,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "table[data-v-634afedc] {\n  margin: 0 auto;\n}\ntable th[data-v-634afedc] {\n  padding: 5px 15px;\n}\ntable td[data-v-634afedc] {\n  padding: 5px 15px;\n}", ""]);
+exports.push([module.i, "table[data-v-634afedc] {\n  margin: 0 auto;\n}\ntable th[data-v-634afedc] {\n  padding: 5px 15px;\n  font-size: 18px;\n}\ntable td[data-v-634afedc] {\n  padding: 5px 15px;\n}", ""]);
 
 // exports
 
@@ -38161,25 +38206,59 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c(
+      "table",
+      { attrs: { border: "1" } },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.videogameList, function (videogame) {
+          return _c("tr", { key: videogame.id }, [
+            _c("td", [_vm._v(_vm._s(videogame.id))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(videogame.title))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(videogame.subtitle))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(videogame.rating))]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  on: {
+                    click: function ($event) {
+                      return _vm.deleteVideogame(videogame.id)
+                    },
+                  },
+                },
+                [_vm._v("Delete")]
+              ),
+            ]),
+          ])
+        }),
+      ],
+      2
+    ),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("table", { attrs: { border: "1" } }, [
-        _c("tr", [
-          _c("th", [_vm._v("Title")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Subtitle")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Rating")]),
-        ]),
-        _vm._v(" "),
-        _c("tr", [_c("td")]),
-      ]),
+    return _c("tr", [
+      _c("th", [_vm._v("id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Title")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Subtitle")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Rating")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Action")]),
     ])
   },
 ]
