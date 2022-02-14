@@ -47,9 +47,6 @@ export default {
         },
 
         matchVideogameDelete(index){
-            // this.videogameList.forEach(videogame => {
-                
-            // });
             for(let x = 0; x<= this.videogameList.length; x++){
                 if(index == this.videogameList[x].id){
                     return x

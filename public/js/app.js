@@ -1960,8 +1960,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     matchVideogameDelete: function matchVideogameDelete(index) {
-      // this.videogameList.forEach(videogame => {
-      // });
       for (var x = 0; x <= this.videogameList.length; x++) {
         if (index == this.videogameList[x].id) {
           return x;
