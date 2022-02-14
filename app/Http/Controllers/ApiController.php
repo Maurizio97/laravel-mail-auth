@@ -20,6 +20,6 @@ class ApiController extends Controller
     public function delete($id) {
         $videogame = Videogame::findOrFail($id);
         $videogame -> delete();
-        Mail::to(Auth::user() -> email) -> send(new DeleteMail());
+        Mail::to(Auth::user() -> email) -> send(new DeleteMail($videogame));
     }
 }

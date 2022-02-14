@@ -12,11 +12,11 @@ class DeleteMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    // public $videogame;
+    public $videogame;
 
-    public function __construct()
+    public function __construct($videogame)
     {
-        // $this -> $videogame = $data;
+        $this -> videogame = $videogame;
     }
 
     public function build()
